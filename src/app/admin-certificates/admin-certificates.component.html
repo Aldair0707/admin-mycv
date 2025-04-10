@@ -1,1 +1,29 @@
-<p>admin-certificates works!</p>
+<div class ="container color-dark">
+    
+    <div class="col">
+     <p>certificates items </p>
+    </div>
+ </div>
+ 
+ <div class="container color-light">
+   
+    <div class = "col">
+       
+       <form>
+       <input type="text" class="txt" name="certificates" placeholder="(Certificates)" [(ngModel)]= "myCertificates.certificates"> <br>
+           
+       <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarJob()">
+       </form>
+    </div>
+ 
+    <div class = "col">
+       <p class="life-container" *ngFor="let job of certificates;">
+       
+         <input type="submit" class="btn" value="update" (click)='confirmUpdate(job.id!)'>
+         <input type="submit" class="btn" value="delete" (click)='confirmDelete(job.id!)'>
+       {{job.certificates}}
+       </p>
+    </div>
+ 
+ </div>
+ 
