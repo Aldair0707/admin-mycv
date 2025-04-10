@@ -6,5 +6,6 @@ export class Header {
   location?: string='';
   phoneNumber?: string='';
   socialNetwork?: string='';
+  photoUrl?: string='';
 }
 
