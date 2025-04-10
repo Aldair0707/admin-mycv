@@ -1,1 +1,29 @@
-<p>admin-education works!</p>
+<div class ="container color-dark">
+    
+   <div class="col">
+	<p>education items </p>
+   </div>
+</div>
+
+<div class="container color-light">
+  
+   <div class = "col">
+      
+      <form>
+	  <input type="text" class="txt" name="university" placeholder="(University)" [(ngModel)]= "myEducation.university"> <br>
+	  <input type="text" class="txt" name="highschool" placeholder="(Highschool)" [(ngModel)]= "myEducation.highschool"> <br>
+          
+	  <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarJob()">
+      </form>
+   </div>
+
+   <div class = "col">
+      <p class="life-container" *ngFor="let job of education;">
+      
+         <input type="submit" class="btn" value="update" (click)='confirmUpdate(job.id!)'>
+         <input type="submit" class="btn" value="delete" (click)='confirmDelete(job.id!)'>
+      {{job.highschool}} - {{job.university}}
+      </p>
+   </div>
+
+</div>
