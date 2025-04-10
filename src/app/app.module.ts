@@ -1,3 +1,9 @@
+import { FormsModule } from '@angular/forms';
+
+import { AngularFireModule } from '@angular/fire/compat';
+
+import { environment } from '../environments/environment';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -24,7 +30,9 @@ import { AdminWorkexperienceComponent } from './admin-workexperience/admin-worke
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]
