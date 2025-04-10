@@ -1,6 +1,6 @@
 export const environment = {
    production: false,
-   firebaseConfig: {
+   firebase: {
       apiKey: "AIzaSyBtS2EPwTAqnCqMrUF3O9plaVr4mAo-jsI",
       authDoamin: "my-cv-aldair.firebaseapp.com",
       projectId: "my-cv-aldair",
