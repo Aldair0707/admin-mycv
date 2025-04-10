@@ -1,1 +1,30 @@
-<p>admin-languages works!</p>
+<div class ="container color-dark">
+    
+    <div class="col">
+     <p>languages items </p>
+    </div>
+ </div>
+ 
+ <div class="container color-light">
+   
+    <div class = "col">
+       
+       <form>
+       <input type="text" class="txt" name="framework" placeholder="(originlanguages)" [(ngModel)]= "myLanguages.originLanguage"> <br>
+       <input type="text" class="txt" name="exlanguage" placeholder="(foreignlanguage)" [(ngModel)]= "myLanguages.exLanguage"> <br>
+           
+       <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarJob()">
+       </form>
+    </div>
+ 
+    <div class = "col">
+       <p class="life-container" *ngFor="let job of languages;">
+       
+         <input type="submit" class="btn" value="update" (click)='confirmUpdate(job.id!)'>
+         <input type="submit" class="btn" value="delete" (click)='confirmDelete(job.id!)'>
+       {{job.originLanguage}} - {{job.exLanguage}}
+       </p>
+    </div>
+ 
+ </div>
+ 
