@@ -44,6 +44,7 @@ export class AdminLanguagesComponent {
       console.log(this.myLanguages);
       this.languagesService.createLanguages(this.myLanguages).then(() =>{
         console.log('Created new item successfully!');
+        this.resetForm(false);
       });
     }
   
