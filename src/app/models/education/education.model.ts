@@ -1,5 +1,7 @@
 export class Education {
   id?: string;
-  highschool?: string='';
+  institution?: string='';
   university?: string='';
+  startDate?: string='';
+  endDate?: string='';
 }
