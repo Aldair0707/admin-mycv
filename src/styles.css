@@ -1,10 +1,10 @@
-@import url('https://fonts.googlesapis.com/css?family=Raleway:300,700');
 body{
    background: #2E9ce6;
    padding: 3em;
    font-family: 'Raleway', 'Arial';
-   color: #fff;
+   color: #080808;
 }
+/*
 
 ul{
    list-style-type: none;
@@ -25,3 +25,71 @@ a{
    color: #fff;
    text-decoration: none;
 }
+*/
+ 
+.container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 2rem;
+   justify-content: center;
+   margin: 2rem auto;
+   padding: 2rem;
+   border-radius: 12px;
+   max-width: 1000px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+ }
+ 
+ .color-dark {
+   background-color: #ffffff;  
+ }
+ 
+ .color-light {
+   background-color: #ffffff;
+ }
+ 
+ .col {
+   flex: 1 1 1000px;
+ }
+ 
+ input.txt {
+   width: 100%;
+   padding: 0.6rem 0.1rem;
+   margin-bottom: 0.8rem;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   font-size: 0.95rem;
+   transition: 0.3s ease-in-out;
+ }
+ 
+ input.txt:focus {
+   border-color: #007bff;
+   outline: none;
+   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+ }
+ 
+ .btn {
+   background-color: #007bff;
+   border: none;
+   color: white;
+   padding: 0.4rem 1rem;
+   border-radius: 8px;
+   font-size: 0.9rem;
+   margin-right: 0.5rem;
+   margin-top: 0.5rem;
+   cursor: pointer;
+   transition: 0.2s ease-in-out;
+ }
+ 
+ .btn:hover {
+   background-color: #0056b3;
+ }
+ 
+ .life-container {
+   padding: 0.5rem;
+   background-color: #f5faff;
+   border-radius: 8px;
+   margin-bottom: 0.8rem;
+   font-size: 0.95rem;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+ }
+ 
