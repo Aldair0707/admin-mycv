@@ -12,6 +12,8 @@ export class AdminCertificatesComponent {
       itemCount: number = 0;
       btnTxt: string ="Agregar";
       goalText: string ="";
+      isEditing: boolean = false;
+      idEnEdicion: string = '';
       certificates: Certificates[] = [];
       myCertificates: Certificates = new Certificates();
     
@@ -29,6 +31,15 @@ export class AdminCertificatesComponent {
           console.log(this.certificates);
         });
       }
+
+      resetForm() {
+        const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
+        if (confirmado) {
+          this.myCertificates = new Certificates();
+          this.isEditing = false;
+          this.idEnEdicion = '';
+        } 
+      }
     
       AgregarJob(){
         console.log(this.myCertificates);
@@ -44,11 +55,16 @@ export class AdminCertificatesComponent {
           console.log(id);
       }
     
-      updateJob(id?: string) {
-        this.certificatesService.updateCertificates(this.myCertificates, id).then(() => {
-          console.log('update item successfully');
-        });
-         console.log(id);
+      updateJob() {
+        if (this.isEditing && this.idEnEdicion) {
+          const confirmado = confirm('¿Estás seguro de que deseas actualizar este ítem?');
+          if (confirmado) {
+            this.certificatesService.updateCertificates(this.myCertificates, this.idEnEdicion).then(() => {
+              console.log('Item actualizado con éxito');
+              this.resetForm();
+            });
+          }
+        }
       }
 
       confirmDelete(id: string) {
@@ -57,9 +73,12 @@ export class AdminCertificatesComponent {
         }
       }
     
-      confirmUpdate(id: string) {
-        if (confirm('¿Estás seguro de que quieres actualizar este ítem?')) {
-          this.updateJob(id);
+      editJob(id: string) {
+        const item = this.certificates.find(h => h.id === id);
+        if (item) {
+          this.myCertificates = { ...item };
+          this.isEditing = true;
+          this.idEnEdicion = id;
         }
       }
 }

@@ -13,6 +13,8 @@ export class AdminWorkexperienceComponent {
   itemCount: number = 0;
   btnTxt: string = "Agregar";
   goalText: string = "";
+  isEditing: boolean = false;
+  idEnEdicion: string = '';
   workExperience: WorkExperience[] = [];
   myWorkExperience: WorkExperience = new WorkExperience();
 
@@ -30,6 +32,15 @@ export class AdminWorkexperienceComponent {
     });
   }
 
+  resetForm() {
+    const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
+    if (confirmado) {
+      this.myWorkExperience = new WorkExperience();
+      this.isEditing = false;
+      this.idEnEdicion = '';
+     } 
+    } 
+
   AgregarJob(){
     console.log(this.myWorkExperience);
     this.workExperienceService.createWorkExperience(this.myWorkExperience).then(() => {
@@ -44,11 +55,16 @@ export class AdminWorkexperienceComponent {
       console.log(id);
   }
 
-  updateJob(id?: string) {
-    this.workExperienceService.updateWorkExperience(this.myWorkExperience, id).then(() => {
-      console.log('update item successfully');
-    });
-     console.log(id);
+  updateJob() {
+    if (this.isEditing && this.idEnEdicion) {
+      const confirmado = confirm('¿Estás seguro de que deseas actualizar este ítem?');
+      if (confirmado) {
+        this.workExperienceService.updateWorkExperience(this.myWorkExperience, this.idEnEdicion).then(() => {
+          console.log('Item actualizado con éxito');
+          this.resetForm();
+        });
+      }
+    }
   }
 
   confirmDelete(id: string) {
@@ -57,9 +73,12 @@ export class AdminWorkexperienceComponent {
     }
   }
 
-  confirmUpdate(id: string) {
-    if (confirm('¿Estás seguro de que quieres actualizar este ítem?')) {
-      this.updateJob(id);
+  editJob(id: string) {
+    const item = this.workExperience.find(h => h.id === id);
+    if (item) {
+      this.myWorkExperience = { ...item };
+      this.isEditing = true;
+      this.idEnEdicion = id;
     }
   }
 }
