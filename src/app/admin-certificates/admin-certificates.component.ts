@@ -44,6 +44,7 @@ export class AdminCertificatesComponent {
         console.log(this.myCertificates);
         this.certificatesService.createCertificates(this.myCertificates).then(() =>{
           console.log('Created new item successfully!');
+          this.resetForm(false);
         });
       }
     
