@@ -1,29 +1,92 @@
-<div class ="container color-dark">
-    
-   <div class="col">
-	<p>education items </p>
-   </div>
-</div>
+<div class="container-app">
+  <section class="section-header">
+    <h2><i class="fas fa-graduation-cap"></i> Educación</h2>
 
-<div class="container color-light">
-  
-   <div class = "col">
+    <!-- FORMULARIO -->
+    <form class="form-header">
+      <div class="form-group">
+        <label>Institución</label>
+        <input
+          type="text"
+          name="institution"
+          placeholder="Ej. Bachillerato CBTIS 123"
+          [(ngModel)]="myEducation.institution"
+           
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Carrera</label>
+        <input
+          type="text"
+          name="Carrera"
+          placeholder="Ej. Licenciatura, maestria o doctorado"
+          [(ngModel)]="myEducation.university"
+           
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de Inicio</label>
+        <input
+          type="text"
+          name="startDate"
+          placeholder="mm/yyyy"
+          [(ngModel)]="myEducation.startDate"
+           
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de Fin</label>
+        <input
+          type="text"
+          name="endDate"
+          placeholder="mm/yyyy"
+          [(ngModel)]="myEducation.endDate"
+           
+        />
+      </div>
+
+      <!-- BOTONES -->
+      <div class="form-buttons" style="grid-column: span 2">
+        <button
+          *ngIf="!isEditing"
+          type="button"
+          class="btn-primary btn-standard"
+          (click)="AgregarJob()"
+        >
+          <i class="fas fa-plus"></i> Agregar
+        </button>
       
-      <form>
-	  <input type="text" class="txt" name="university" placeholder="(University)" [(ngModel)]= "myEducation.university"> <br>
-	  <input type="text" class="txt" name="highschool" placeholder="(Highschool)" [(ngModel)]= "myEducation.highschool"> <br>
-          
-	  <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarJob()">
-      </form>
-   </div>
+        <button *ngIf="isEditing" type="button" class="btn-primary btn-standard" (click)="updateJob()">
+          <i class="fas fa-save"></i> Actualizar
+        </button>
+        <button *ngIf="isEditing" type="button" class="btn-secondary btn-standard" (click)="resetForm()">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+      </div>
+    </form>
 
-   <div class = "col">
-      <p class="life-container" *ngFor="let job of education;">
-      
-         <input type="submit" class="btn" value="update" (click)='confirmUpdate(job.id!)'>
-         <input type="submit" class="btn" value="delete" (click)='confirmDelete(job.id!)'>
-      {{job.highschool}} - {{job.university}}
-      </p>
-   </div>
-
+    <!-- LISTA EDUCACIÓN -->
+    <div class="header-list">
+      <div class="header-card" *ngFor="let job of education">
+        <div class="header-info">
+          <p class="header-name">{{ job.university }}</p>
+          <p class="header-location">{{ job.institution }}</p>
+          <p class="header-description">
+            {{ job.startDate }} - {{ job.endDate }}
+          </p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary btn-standard" (click)="editJob(job.id!)">
+            <i class="fas fa-pen"></i> Editar
+          </button>
+          <button class="btn-danger btn-standard" (click)="confirmDelete(job.id!)">
+            <i class="fas fa-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

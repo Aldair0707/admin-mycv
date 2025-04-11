@@ -12,6 +12,8 @@ export class AdminLanguagesComponent {
     itemCount: number = 0;
     btnTxt: string ="Agregar";
     goalText: string ="";
+    isEditing: boolean = false;
+    idEnEdicion: string = '';
     languages: Languages[] = [];
     myLanguages: Languages = new Languages();
   
@@ -29,6 +31,15 @@ export class AdminLanguagesComponent {
         console.log(this.languages);
       });
     }
+
+    resetForm() {
+      const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
+      if (confirmado) {
+        this.myLanguages = new Languages();
+        this.isEditing = false;
+        this.idEnEdicion = '';
+      } 
+    }
   
     AgregarJob(){
       console.log(this.myLanguages);
@@ -44,11 +55,16 @@ export class AdminLanguagesComponent {
         console.log(id);
     }
   
-    updateJob(id?: string) {
-      this.languagesService.updateLanguages(this.myLanguages, id).then(() => {
-        console.log('update item successfully');
-      });
-       console.log(id);
+    updateJob() {
+      if (this.isEditing && this.idEnEdicion) {
+        const confirmado = confirm('¿Estás seguro de que deseas actualizar este ítem?');
+        if (confirmado) {
+          this.languagesService.updateLanguages(this.myLanguages, this.idEnEdicion).then(() => {
+            console.log('Item actualizado con éxito');
+            this.resetForm();
+          });
+        }
+      }
     }
 
     confirmDelete(id: string) {
@@ -57,9 +73,12 @@ export class AdminLanguagesComponent {
       }
     }
   
-    confirmUpdate(id: string) {
-      if (confirm('¿Estás seguro de que quieres actualizar este ítem?')) {
-        this.updateJob(id);
+    editJob(id: string) {
+      const item = this.languages.find(h => h.id === id);
+      if (item) {
+        this.myLanguages = { ...item };
+        this.isEditing = true;
+        this.idEnEdicion = id;
       }
     }
 }
