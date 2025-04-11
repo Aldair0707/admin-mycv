@@ -12,6 +12,8 @@ export class AdminInterestsComponent {
     itemCount: number = 0;
     btnTxt: string ="Agregar";
     goalText: string ="";
+    isEditing: boolean = false;
+    idEnEdicion: string = '';
     interests: Interests[] = [];
     myInterests: Interests = new Interests();
     
@@ -29,6 +31,15 @@ export class AdminInterestsComponent {
         console.log(this.interests);
         });
       }
+
+      resetForm() {
+        const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
+        if (confirmado) {
+          this.myInterests = new Interests();
+          this.isEditing = false;
+          this.idEnEdicion = '';
+        } 
+      }
     
       AgregarJob(){
         console.log(this.myInterests);
@@ -44,11 +55,16 @@ export class AdminInterestsComponent {
           console.log(id);
       }
     
-      updateJob(id?: string) {
-        this.interestsService.updateInterests(this.myInterests, id).then(() => {
-          console.log('update item successfully');
-        });
-         console.log(id);
+      updateJob() {
+        if (this.isEditing && this.idEnEdicion) {
+          const confirmado = confirm('¿Estás seguro de que deseas actualizar este ítem?');
+          if (confirmado) {
+            this.interestsService.updateInterests(this.myInterests, this.idEnEdicion).then(() => {
+              console.log('Item actualizado con éxito');
+              this.resetForm();
+            });
+          }
+        }
       }
 
       confirmDelete(id: string) {
@@ -57,9 +73,12 @@ export class AdminInterestsComponent {
         }
       }
     
-      confirmUpdate(id: string) {
-        if (confirm('¿Estás seguro de que quieres actualizar este ítem?')) {
-          this.updateJob(id);
+      editJob(id: string) {
+        const item = this.interests.find(h => h.id === id);
+        if (item) {
+          this.myInterests = { ...item };
+          this.isEditing = true;
+          this.idEnEdicion = id;
         }
       }
 }

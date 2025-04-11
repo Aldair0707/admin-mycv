@@ -1,29 +1,56 @@
-<div class ="container color-dark">
-    
-    <div class="col">
-     <p>interests items </p>
-    </div>
- </div>
+<div class="container-app">
+   <section class="section-header">
+     <h2><i class="fas fa-heart"></i> Intereses</h2>
  
- <div class="container color-light">
-   
-    <div class = "col">
-       
-       <form>
-       <input type="text" class="txt" name="work" placeholder="(interests)" [(ngModel)]= "myInterests.work"> <br>
-           
-       <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarJob()">
-       </form>
-    </div>
+     <!-- FORMULARIO -->
+     <form class="form-header">
+       <div class="form-group" style="grid-column: span 2">
+         <label>Interés Personal</label>
+         <input
+           type="text"
+           name="work"
+           placeholder="Ej. Leer, Viajar, Programar..."
+           [(ngModel)]="myInterests.work"
+            
+         />
+       </div>
  
-    <div class = "col">
-       <p class="life-container" *ngFor="let job of interests;">
-       
-         <input type="submit" class="btn" value="update" (click)='confirmUpdate(job.id!)'>
-         <input type="submit" class="btn" value="delete" (click)='confirmDelete(job.id!)'>
-       {{job.work}}
-       </p>
-    </div>
+       <!-- BOTONES -->
+       <div class="form-buttons" style="grid-column: span 2">
+        <button
+          *ngIf="!isEditing"
+          type="button"
+          class="btn-primary btn-standard"
+          (click)="AgregarJob()"
+        >
+          <i class="fas fa-plus"></i> Agregar
+        </button>
+      
+        <button *ngIf="isEditing" type="button" class="btn-primary btn-standard" (click)="updateJob()">
+          <i class="fas fa-save"></i> Actualizar
+        </button>
+        <button *ngIf="isEditing" type="button" class="btn-secondary btn-standard" (click)="resetForm()">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+      </div>
+     </form>
  
+     <!-- LISTADO DE INTERESES -->
+     <div class="header-list">
+       <div class="header-card" *ngFor="let job of interests">
+         <div class="header-info">
+           <p class="header-name">{{ job.work }}</p>
+         </div>
+         <div class="header-actions">
+           <button class="btn-secondary btn-standard" (click)="editJob(job.id!)">
+             <i class="fas fa-pen"></i> Editar
+           </button>
+           <button class="btn-danger btn-standard" (click)="confirmDelete(job.id!)">
+             <i class="fas fa-trash"></i> Eliminar
+           </button>
+         </div>
+       </div>
+     </div>
+   </section>
  </div>
  

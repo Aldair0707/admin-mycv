@@ -1,22 +1,20 @@
-<h3> <b> Admin-CV App </b> </h3>
-<nav>
-  <ul>
-    <li><a routerLink="/header"> header </a>
-    </li>
-    <li><a routerLink="/workexperience"> work-experience </a>
-    </li>
-    <li><a routerLink="/education"> education </a>
-    </li>
-    <li><a routerLink="/certificates"> certificates </a>
-    </li>
-    <li><a routerLink="/skills"> skills </a>
-    </li>
-    <li><a routerLink="/languages"> languages </a>
-    </li>
-    <li><a routerLink="/interests"> interests </a>
-    </li>
-  </ul>
-</nav>
+<header class="app-header-wrapper">
+  <div class="app-header container-app">
+    <h1 class="app-title">Admin-CV App</h1>
+    <nav class="navbar">
+      <ul class="nav-list">
+        <li><a routerLink="/header"><i class="fas fa-id-card"></i> Header</a></li>
+        <li><a routerLink="/work-experience"><i class="fas fa-briefcase"></i> Work Experience</a></li>
+        <li><a routerLink="/education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+        <li><a routerLink="/certificates"><i class="fas fa-certificate"></i> Certificates</a></li>
+        <li><a routerLink="/skills"><i class="fas fa-brain"></i> Skills</a></li>
+        <li><a routerLink="/languages"><i class="fas fa-language"></i> Languages</a></li>
+        <li><a routerLink="/interests"><i class="fas fa-heart"></i> Interests</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-
-<router-outlet></router-outlet>
+<main class="container-main">
+  <router-outlet></router-outlet>
+</main>
