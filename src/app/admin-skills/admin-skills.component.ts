@@ -45,6 +45,7 @@ export class AdminSkillsComponent {
         console.log(this.mySkills);
         this.skillsService.createSkills(this.mySkills).then(() =>{
           console.log('Created new item successfully!');
+          this.resetForm(false);
         });
       }
     

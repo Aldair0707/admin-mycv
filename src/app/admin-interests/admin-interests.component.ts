@@ -44,6 +44,7 @@ export class AdminInterestsComponent {
         console.log(this.myInterests);
         this.interestsService.createInterests(this.myInterests).then(() =>{
           console.log('Created new item successfully!');
+          this.resetForm(false);
         });
       }
     
