@@ -44,6 +44,7 @@ export class AdminEducationComponent {
     console.log(this.myEducation);
     this.educationService.createEducation(this.myEducation).then(() =>{
       console.log('Created new item successfully!');
+      this.resetForm(false);
     });
   }
 
