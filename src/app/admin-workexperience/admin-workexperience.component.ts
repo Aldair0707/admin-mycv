@@ -32,14 +32,13 @@ export class AdminWorkexperienceComponent {
     });
   }
 
-  resetForm() {
-    const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
-    if (confirmado) {
-      this.myWorkExperience = new WorkExperience();
-      this.isEditing = false;
-      this.idEnEdicion = '';
-     } 
-    } 
+  resetForm(confirmar = true) {
+          if (!confirmar || confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.')) {
+            this.myWorkExperience = new WorkExperience();
+            this.isEditing = false;
+            this.idEnEdicion = '';
+          }
+        }
 
   AgregarJob(){
     console.log(this.myWorkExperience);
@@ -61,11 +60,11 @@ export class AdminWorkexperienceComponent {
       if (confirmado) {
         this.workExperienceService.updateWorkExperience(this.myWorkExperience, this.idEnEdicion).then(() => {
           console.log('Item actualizado con éxito');
-          this.resetForm();
+          this.resetForm(false);  
         });
       }
     }
-  }
+   }
 
   confirmDelete(id: string) {
     if (confirm('¿Estás seguro de que quieres eliminar este ítem?')) {
