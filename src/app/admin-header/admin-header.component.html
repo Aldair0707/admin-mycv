@@ -1,32 +1,70 @@
-<div class="container color-dark">
-  <div class="col">
-    <p>work-experience items</p>
+<div class="container-app">
+<section class="section-header">
+  <h2><i class="fas fa-id-card"></i> Intereses</h2>
+
+  <form class="form-header">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="myHeader.name" name="name" placeholder="Ej. Aldair Hernández" required [disabled]="!isEditing"/>
+    </div>
+
+    <div class="form-group">
+      <label>Meta de Vida</label>
+      <input type="text" [(ngModel)]="myHeader.goalLife" name="goalLife" placeholder="Meta profesional o personal" [disabled]="!isEditing"/>
+    </div>
+
+    <div class="form-group">
+      <label>Correo</label>
+      <input type="email" [(ngModel)]="myHeader.email" name="email" placeholder="correo@ejemplo.com" required [disabled]="!isEditing"/>
+    </div>
+
+    <div class="form-group">
+      <label>Ubicación</label>
+      <input type="text" [(ngModel)]="myHeader.location" name="location" placeholder="Ciudad, País" [disabled]="!isEditing"/>
+    </div>
+
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input type="text" [(ngModel)]="myHeader.phoneNumber" name="phoneNumber" placeholder="+52 123 456 7890" [disabled]="!isEditing" />
+    </div>
+
+    <div class="form-group">
+      <label>Red Social</label>
+      <input type="text" [(ngModel)]="myHeader.socialNetwork" name="socialNetwork" placeholder="linkedin.com/in/usuario" [disabled]="!isEditing" />
+    </div>
+
+    <div class="form-group">
+      <label>URL de Foto</label>
+      <input type="text" [(ngModel)]="myHeader.photoUrl" name="photoUrl" placeholder="https://..." [disabled]="!isEditing" />
+    </div>
+
+    <!-- BOTONES de ACTUALIZAR y CANCELAR solo si estás editando -->
+    <div class="form-buttons" *ngIf="isEditing">
+      <button type="button" class="btn-primary btn-standard" (click)="updateJob()">
+        <i class="fas fa-save"></i> Actualizar
+      </button>
+      <button type="button" class="btn-secondary btn-standard" (click)="resetForm()">
+        <i class="fas fa-times"></i> Cancelar
+      </button>
+    </div>
+  </form>
+
+  <!-- LISTADO DE ITEMS DE FIREBASE -->
+  <div class="header-list">
+    <div class="header-card" *ngFor="let job of header">
+      <div class="header-info">
+        <p class="header-name">{{ job.name }}</p>
+        <p class="header-location">{{ job.location }}</p>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-secondary btn-standard" (click)="editJob(job.id!)">
+          <i class="fas fa-pen"></i> Editar
+        </button>
+        <button type="button" class="btn-danger btn-standard" (click)="confirmDelete(job.id!)">
+          <i class="fas fa-trash"></i> Eliminar
+        </button>
+      </div>      
+    </div>
   </div>
+</section>
 </div>
-
-<div class="container color-light">
-  <div class="col">
-    <form>
-      <input type="text" class="txt" name="name" placeholder="(name)" [(ngModel)]="myHeader.name"> <br>
-      <input type="text" class="txt" name="goalLife" placeholder="(goalLife)" [(ngModel)]="myHeader.goalLife"><br>
-      <input type="text" class="txt" name="email" placeholder="(email)" [(ngModel)]="myHeader.email"><br>
-      <input type="text" class="txt" name="location" placeholder="location" [(ngModel)]="myHeader.location"><br>
-      <input type="text" class="txt" name="phoneNumber" placeholder="phoneNumber" [(ngModel)]="myHeader.phoneNumber"><br>
-      <input type="text" class="txt" name="socialNetwork" placeholder="socialNetwork" [(ngModel)]="myHeader.socialNetwork"><br>
-      <input type="text" class="txt" name="photoUrl" placeholder="photoUrl" [(ngModel)]="myHeader.photoUrl"><br>
-
-      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarJob()">
-    </form>
-  </div>
-
-  <div class="col">
-    <p class="life-container" *ngFor="let job of header">
-
-         <input type="submit" class="btn" value="update" (click)='confirmUpdate(job.id!)'>
-         <input type="submit" class="btn" value="delete" (click)='confirmDelete(job.id!)'>
-    
-      {{job.name}} – {{job.location}}
-    </p>
-  </div>
-</div>
-

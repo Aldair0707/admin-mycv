@@ -11,7 +11,7 @@ import { AdminInterestsComponent } from './admin-interests/admin-interests.compo
 
 const routes: Routes = [
   { path: 'header', component: AdminHeaderComponent },
-  { path: 'workexperience', component: AdminWorkexperienceComponent },
+  { path: 'work-experience', component: AdminWorkexperienceComponent },
   { path: 'education', component: AdminEducationComponent },
   { path: 'certificates', component: AdminCertificatesComponent },
   { path: 'skills', component: AdminSkillsComponent },

@@ -1,31 +1,72 @@
-<div class="container color-dark">
-  <div class="col">
-    <p>work-experience items</p>
-  </div>
-</div>
+<div class="container-app">
+  <section class="section-header">
+    <h2><i class="fas fa-briefcase"></i>Experiencia Laboral</h2>
 
-<div class="container color-light">
-  <div class="col">
-    <form>
-      <input type="text" class="txt" name="startDate" placeholder="startDate(mm/yyyy)" [(ngModel)]="myWorkExperience.startDate"> <br>
-      <input type="text" class="txt" name="endDate" placeholder="end date (mm/yyyy)" [(ngModel)]="myWorkExperience.endDate"><br>
-      <input type="text" class="txt" name="location" placeholder="location (city, country)" [(ngModel)]="myWorkExperience.location"><br>
-      <input type="text" class="txt" name="position" placeholder="position" [(ngModel)]="myWorkExperience.position"><br>
-      <input type="text" class="txt" name="company" placeholder="company" [(ngModel)]="myWorkExperience.company"><br>
-      <input type="text" class="txt" name="accomplishments" placeholder="accomplishments" [(ngModel)]="myWorkExperience.accomplishments"><br>
+    <form class="form-header">
+      <div class="form-group">
+        <label>Fecha de Inicio</label>
+        <input type="text" name="startDate" placeholder="mm/yyyy" [(ngModel)]="myWorkExperience.startDate" />
+      </div>
 
-      <input type="submit" class="btn" value="{{ btnTxt }}" (click)="AgregarJob()">
+      <div class="form-group">
+        <label>Fecha de Fin</label>
+        <input type="text" name="endDate" placeholder="mm/yyyy" [(ngModel)]="myWorkExperience.endDate"  />
+      </div>
+
+      <div class="form-group">
+        <label>Ubicación</label>
+        <input type="text" name="location" placeholder="Ciudad, País" [(ngModel)]="myWorkExperience.location"  />
+      </div>
+
+      <div class="form-group">
+        <label>Puesto</label>
+        <input type="text" name="position" placeholder="Puesto" [(ngModel)]="myWorkExperience.position"   />
+      </div>
+
+      <div class="form-group">
+        <label>Empresa</label>
+        <input type="text" name="company" placeholder="Empresa" [(ngModel)]="myWorkExperience.company"   />
+      </div>
+
+      <div class="form-group" style="grid-column: span 2">
+        <label>Logros</label>
+        <input type="text" name="accomplishments" placeholder="Logros principales" [(ngModel)]="myWorkExperience.accomplishments"   />
+      </div>
+
+      <div class="form-buttons" style="grid-column: span 2">
+        <button
+          *ngIf="!isEditing"
+          type="button"
+          class="btn-primary btn-standard"
+          (click)="AgregarJob()"
+        >
+          <i class="fas fa-plus"></i> Agregar
+        </button>
+      
+        <button *ngIf="isEditing" type="button" class="btn-primary btn-standard" (click)="updateJob()">
+          <i class="fas fa-save"></i> Actualizar
+        </button>
+        <button *ngIf="isEditing" type="button" class="btn-secondary btn-standard" (click)="resetForm()">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+      </div>
     </form>
-  </div>
 
-  <div class="col">
-    <p class="life-container" *ngFor="let job of workExperience">
-
-      <input type="submit" class="btn" value="update" (click)='confirmUpdate(job.id!)'>
-      <input type="submit" class="btn" value="delete" (click)='confirmDelete(job.id!)'>
-    
-      {{job.company}} – {{job.position}}
-    </p>
-  </div>
+    <div class="header-list">
+      <div class="header-card" *ngFor="let job of workExperience">
+        <div class="header-info">
+          <p class="header-name">{{ job.company }} – {{ job.position }}</p>
+          <p class="header-location">{{ job.startDate }} a {{ job.endDate }} | {{ job.location }}</p>
+        </div>
+        <div class="header-actions">
+          <button type="button" class="btn-secondary btn-standard" (click)="editJob(job.id!)">
+            <i class="fas fa-pen"></i> Editar
+          </button>
+          <button type="button" class="btn-danger btn-standard" (click)="confirmDelete(job.id!)">
+            <i class="fas fa-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
-

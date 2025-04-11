@@ -12,6 +12,8 @@ export class AdminSkillsComponent {
     itemCount: number = 0;
     btnTxt: string ="Agregar";
     goalText: string ="";
+    isEditing: boolean = false;
+    idEnEdicion: string = '';
     skills: Skills[] = [];
     mySkills: Skills = new Skills();
     
@@ -29,6 +31,16 @@ export class AdminSkillsComponent {
         console.log(this.skills);
         });
       }
+
+
+      resetForm() {
+        const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
+        if (confirmado) {
+          this.mySkills = new Skills();
+          this.isEditing = false;
+          this.idEnEdicion = '';
+        } 
+      }
     
       AgregarJob(){
         console.log(this.mySkills);
@@ -44,11 +56,16 @@ export class AdminSkillsComponent {
           console.log(id);
       }
     
-      updateJob(id?: string) {
-        this.skillsService.updateSkills(this.mySkills, id).then(() => {
-          console.log('update item successfully');
-        });
-         console.log(id);
+      updateJob() {
+        if (this.isEditing && this.idEnEdicion) {
+          const confirmado = confirm('¿Estás seguro de que deseas actualizar este ítem?');
+          if (confirmado) {
+            this.skillsService.updateSkills(this.mySkills, this.idEnEdicion).then(() => {
+              console.log('Item actualizado con éxito');
+              this.resetForm();
+            });
+          }
+        }
       }
 
       confirmDelete(id: string) {
@@ -57,9 +74,12 @@ export class AdminSkillsComponent {
         }
       }
     
-      confirmUpdate(id: string) {
-        if (confirm('¿Estás seguro de que quieres actualizar este ítem?')) {
-          this.updateJob(id);
+      editJob(id: string) {
+        const item = this.skills.find(h => h.id === id);
+        if (item) {
+          this.mySkills = { ...item };
+          this.isEditing = true;
+          this.idEnEdicion = id;
         }
       }
 }
