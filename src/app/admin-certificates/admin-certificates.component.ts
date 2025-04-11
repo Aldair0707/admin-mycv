@@ -32,14 +32,13 @@ export class AdminCertificatesComponent {
         });
       }
 
-      resetForm() {
-        const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
-        if (confirmado) {
-          this.myCertificates = new Certificates();
-          this.isEditing = false;
-          this.idEnEdicion = '';
-        } 
-      }
+      resetForm(confirmar = true) {
+            if (!confirmar || confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.')) {
+              this.myCertificates = new Certificates();
+              this.isEditing = false;
+              this.idEnEdicion = '';
+            }
+          }
     
       AgregarJob(){
         console.log(this.myCertificates);
@@ -61,11 +60,11 @@ export class AdminCertificatesComponent {
           if (confirmado) {
             this.certificatesService.updateCertificates(this.myCertificates, this.idEnEdicion).then(() => {
               console.log('Item actualizado con éxito');
-              this.resetForm();
+              this.resetForm(false);  
             });
           }
         }
-      }
+       }
 
       confirmDelete(id: string) {
         if (confirm('¿Estás seguro de que quieres eliminar este ítem?')) {

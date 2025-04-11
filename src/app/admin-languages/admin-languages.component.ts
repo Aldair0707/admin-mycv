@@ -32,13 +32,12 @@ export class AdminLanguagesComponent {
       });
     }
 
-    resetForm() {
-      const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
-      if (confirmado) {
+    resetForm(confirmar = true) {
+      if (!confirmar || confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.')) {
         this.myLanguages = new Languages();
         this.isEditing = false;
         this.idEnEdicion = '';
-      } 
+      }
     }
   
     AgregarJob(){
@@ -61,11 +60,11 @@ export class AdminLanguagesComponent {
         if (confirmado) {
           this.languagesService.updateLanguages(this.myLanguages, this.idEnEdicion).then(() => {
             console.log('Item actualizado con éxito');
-            this.resetForm();
+            this.resetForm(false);  
           });
         }
       }
-    }
+     }
 
     confirmDelete(id: string) {
       if (confirm('¿Estás seguro de que quieres eliminar este ítem?')) {
