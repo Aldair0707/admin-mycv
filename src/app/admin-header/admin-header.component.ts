@@ -31,14 +31,13 @@ export class AdminHeaderComponent {
        });
      }
 
-     resetForm() {
-      const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
-      if (confirmado) {
+     resetForm(confirmar = true) {
+      if (!confirmar || confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.')) {
         this.myHeader = new Header();
         this.isEditing = false;
         this.idEnEdicion = '';
-      } 
-     }
+      }
+    }
    
    
      deleteJob(id? :string){
@@ -54,11 +53,11 @@ export class AdminHeaderComponent {
         if (confirmado) {
           this.headerService.updateHeader(this.myHeader, this.idEnEdicion).then(() => {
             console.log('Item actualizado con éxito');
-            this.resetForm();
+            this.resetForm(false); 
           });
         }
       }
-    }
+     }
     
     
      confirmDelete(id: string) {

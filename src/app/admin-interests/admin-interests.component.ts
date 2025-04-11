@@ -32,13 +32,12 @@ export class AdminInterestsComponent {
         });
       }
 
-      resetForm() {
-        const confirmado = confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.');
-        if (confirmado) {
+      resetForm(confirmar = true) {
+        if (!confirmar || confirm('¿Estás seguro de cancelar la edición? Se perderán los cambios no guardados.')) {
           this.myInterests = new Interests();
           this.isEditing = false;
           this.idEnEdicion = '';
-        } 
+        }
       }
     
       AgregarJob(){
@@ -61,11 +60,11 @@ export class AdminInterestsComponent {
           if (confirmado) {
             this.interestsService.updateInterests(this.myInterests, this.idEnEdicion).then(() => {
               console.log('Item actualizado con éxito');
-              this.resetForm();
+              this.resetForm(false);  
             });
           }
         }
-      }
+       }
 
       confirmDelete(id: string) {
         if (confirm('¿Estás seguro de que quieres eliminar este ítem?')) {
