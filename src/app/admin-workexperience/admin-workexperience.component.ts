@@ -44,6 +44,7 @@ export class AdminWorkexperienceComponent {
     console.log(this.myWorkExperience);
     this.workExperienceService.createWorkExperience(this.myWorkExperience).then(() => {
       console.log('Created new item successfully!');
+      this.resetForm(false);
     });
   }
 
